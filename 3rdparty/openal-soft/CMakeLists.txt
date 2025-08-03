@@ -21,6 +21,6 @@ target_include_directories (OpenAL PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/openal-sof
 if(MSVC)
     target_compile_options (OpenAL PUBLIC /wd4018 /wd4267 /wd4244)
 else()
-    target_compile_options (OpenAL PUBLIC -Wno-type-limits -Wno-switch -Wno-format-extra-args -Wno-format -Wno-conversion -Wno-attributes -Wno-ignored-attributes -Wno-inline)
+    target_compile_options (OpenAL PUBLIC -Wno-invalid-offsetof -Wno-language-extension-token -Wno-deprecated-builtins -Wno-type-limits -Wno-switch -Wno-format-extra-args -Wno-format -Wno-conversion -Wno-attributes -Wno-ignored-attributes -Wno-inline)
 endif()
 
