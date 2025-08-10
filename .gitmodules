@@ -1,6 +1,6 @@
 [submodule "3rdparty/suitepp"]
 	path = 3rdparty/suitepp
-	url = https://github.com/volcoma/suitepp.git
+	url = https://github.com/unravel-dev/suitepp.git
 [submodule "3rdparty/openal-soft/openal-soft"]
 	path = 3rdparty/openal-soft/openal-soft
 	url = https://github.com/kcat/openal-soft.git
