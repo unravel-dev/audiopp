@@ -216,6 +216,19 @@ void source::set_volume_rolloff(float rolloff) const
     }
 }
 
+void source::set_source_relative(bool relative) const
+{
+    if(is_valid())
+    {
+        impl_->set_source_relative(relative);
+    }
+}
+
+auto source::is_source_relative() const -> bool
+{
+    return is_valid() ? impl_->is_source_relative() : false;
+}
+
 void source::set_distance(float mind, float maxd) const
 {
     if(is_valid())

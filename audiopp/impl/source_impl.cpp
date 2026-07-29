@@ -220,6 +220,18 @@ void source_impl::set_volume_rolloff(float rolloff) const
     al_check(alSourcef(handle_, AL_ROLLOFF_FACTOR, rolloff));
 }
 
+void source_impl::set_source_relative(bool relative) const
+{
+    al_check(alSourcei(handle_, AL_SOURCE_RELATIVE, relative ? AL_TRUE : AL_FALSE));
+}
+
+auto source_impl::is_source_relative() const -> bool
+{
+    ALint relative = AL_FALSE;
+    al_check(alGetSourcei(handle_, AL_SOURCE_RELATIVE, &relative));
+    return relative == AL_TRUE;
+}
+
 void source_impl::set_distance(float mind, float maxd) const
 {
 

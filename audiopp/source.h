@@ -86,6 +86,17 @@ public:
     void set_volume_rolloff(float rolloff) const;
 
     //-----------------------------------------------------------------------------
+    /// When true, position/orientation are relative to the listener (2D / UI).
+    /// When false (default), they are world-space (3D spatial).
+    //-----------------------------------------------------------------------------
+    void set_source_relative(bool relative) const;
+
+    //-----------------------------------------------------------------------------
+    /// Returns whether the source uses listener-relative coordinates.
+    //-----------------------------------------------------------------------------
+    auto is_source_relative() const -> bool;
+
+    //-----------------------------------------------------------------------------
     /// Min = The distance in units that no attenuation occurs.
     /// Max = The distance above which the source is not attenuated any further with a
     /// clamped distance model, or where attenuation reaches 0.0 gain for linear

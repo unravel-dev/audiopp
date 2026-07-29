@@ -42,6 +42,8 @@ public:
 
     void set_volume_rolloff(float rolloff) const;
     void set_distance(float mind, float maxd) const;
+    void set_source_relative(bool relative) const;
+    auto is_source_relative() const -> bool;
     void set_playback_position(float seconds);
     auto get_volume() const -> float;
     auto get_pitch() const -> float;
