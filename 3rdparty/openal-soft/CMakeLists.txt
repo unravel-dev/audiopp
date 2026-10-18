@@ -9,7 +9,11 @@ set( ALSOFT_INSTALL_HRTF_DATA OFF CACHE BOOL "Install HRTF definition files" FOR
 set( ALSOFT_INSTALL_AMBDEC_PRESETS OFF CACHE BOOL "Install AmbDec preset files" FORCE)
 set( ALSOFT_INSTALL OFF CACHE BOOL "Install headers and libraries" FORCE)
 set( ALSOFT_BUILD_IMPORT_LIB OFF CACHE BOOL "Build an import .lib using dlltool (requires sed)" FORCE)
-
+if (BUILD_SHARED_LIBS)
+    set( LIBTYPE SHARED CACHE STRING "Build as shared.")
+else()
+    set( LIBTYPE STATIC CACHE STRING "Build as shared.")
+endif()
 #if(MINGW)
 #	set( ALSOFT_STATIC_LIBGCC ON CACHE BOOL "Force -static-libgcc for static GCC runtimes" FORCE)
 #endif()
