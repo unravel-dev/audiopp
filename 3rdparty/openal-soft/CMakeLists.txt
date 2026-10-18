@@ -20,6 +20,12 @@ endif()
 
 add_subdirectory( openal-soft )
 
+# The fmt 11.1.1 that openal-soft 1.24.3 bundles calls malloc and free without including
+# <cstdlib>, which newer libc++ (the Android NDK r30 one) no longer includes on the way.
+if(TARGET alsoft.fmt AND NOT MSVC)
+    target_compile_options(alsoft.fmt PUBLIC $<$<COMPILE_LANGUAGE:CXX>:-include cstdlib>)
+endif()
+
 target_include_directories (OpenAL PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/openal-soft/include/AL)
 
 if(MSVC)
