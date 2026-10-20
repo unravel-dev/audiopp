@@ -4,6 +4,7 @@
 #include <vector>
 
 #include <alc.h>
+#include <alext.h>
 
 namespace audio
 {
@@ -19,6 +20,10 @@ public:
     void disable();
 
     auto is_valid() const -> bool;
+
+    auto pause() -> bool;
+    void resume();
+    auto is_paused() const -> bool;
 
     auto get_device_id() const -> const std::string&;
     auto get_version() const -> const std::string&;
@@ -45,6 +50,11 @@ private:
     std::string version_;
     std::string vendor_;
     std::string extensions_;
+
+    /// ALC_SOFT_pause_device entry points; null when the device lacks the extension.
+    LPALCDEVICEPAUSESOFT pause_device_{};
+    LPALCDEVICERESUMESOFT resume_device_{};
+    bool is_paused_{};
 };
 } // namespace detail
 } // namespace audio

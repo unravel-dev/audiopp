@@ -164,6 +164,14 @@ device_impl::device_impl(const std::string& id)
     info() << "-- " << openal::alc_extensions(device_.get());
     info() << "-- " << openal::alc_get_max_aux_slots_per_source(device_.get());
 
+    if(openal::al_has_extension(device_.get(), "ALC_SOFT_pause_device"))
+    {
+        pause_device_ =
+            reinterpret_cast<LPALCDEVICEPAUSESOFT>(alcGetProcAddress(device_.get(), "alcDevicePauseSOFT"));
+        resume_device_ =
+            reinterpret_cast<LPALCDEVICERESUMESOFT>(alcGetProcAddress(device_.get(), "alcDeviceResumeSOFT"));
+    }
+
     al_check(alDistanceModel(AL_LINEAR_DISTANCE));
 }
 
@@ -185,6 +193,39 @@ void device_impl::disable()
 auto device_impl::is_valid() const -> bool
 {
     return (device_ != nullptr) && (context_ != nullptr);
+}
+
+auto device_impl::pause() -> bool
+{
+    if(pause_device_ == nullptr || resume_device_ == nullptr)
+    {
+        return false;
+    }
+    if(!is_paused_)
+    {
+        pause_device_(device_.get());
+        is_paused_ = true;
+    }
+    return true;
+}
+
+void device_impl::resume()
+{
+    if(resume_device_ == nullptr)
+    {
+        return;
+    }
+    if(!is_paused_)
+    {
+        return;
+    }
+    resume_device_(device_.get());
+    is_paused_ = false;
+}
+
+auto device_impl::is_paused() const -> bool
+{
+    return is_paused_;
 }
 
 auto device_impl::get_device_id() const -> const std::string&

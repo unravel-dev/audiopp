@@ -132,6 +132,20 @@ int main() try
         EXPECT_NOTHROWS(audio::device device);
 	};
 
+    TEST_CASE("device pause and resume")
+    {
+        audio::device device;
+        EXPECT(!device.is_paused());
+        EXPECT(device.pause());
+        EXPECT(device.is_paused());
+        EXPECT(device.pause());
+        EXPECT(device.is_paused());
+        device.resume();
+        EXPECT(!device.is_paused());
+        device.resume();
+        EXPECT(!device.is_paused());
+    };
+
 
 //    audio::device device;
 //    for(auto& data : loaded_sounds)

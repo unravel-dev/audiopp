@@ -42,6 +42,23 @@ public:
     auto is_valid() const -> bool;
 
     //-----------------------------------------------------------------------------
+    /// Pauses the device: its output stops and nothing is mixed until resume().
+    /// Sources keep their state and playback positions. Returns false when the
+    /// device cannot pause (it lacks ALC_SOFT_pause_device).
+    //-----------------------------------------------------------------------------
+    auto pause() -> bool;
+
+    //-----------------------------------------------------------------------------
+    /// Resumes a paused device.
+    //-----------------------------------------------------------------------------
+    void resume();
+
+    //-----------------------------------------------------------------------------
+    /// Checks whether the device is paused.
+    //-----------------------------------------------------------------------------
+    auto is_paused() const -> bool;
+
+    //-----------------------------------------------------------------------------
     /// Gets the id of the selected device.
     //-----------------------------------------------------------------------------
     auto get_device_id() const -> const std::string&;

@@ -42,6 +42,24 @@ auto device::is_valid() const -> bool
     return impl_ && impl_->is_valid();
 }
 
+auto device::pause() -> bool
+{
+    return impl_ && impl_->pause();
+}
+
+void device::resume()
+{
+    if(impl_)
+    {
+        impl_->resume();
+    }
+}
+
+auto device::is_paused() const -> bool
+{
+    return impl_ && impl_->is_paused();
+}
+
 auto device::get_device_id() const -> const std::string&
 {
     if(impl_)
